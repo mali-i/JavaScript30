@@ -65,10 +65,15 @@
   }
 
   function playSound(e) {
+    console.log(e);
+    // 拿到（指定的）按键对应的“声音”
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    // 拿到对应的div
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!audio) return;
 
+    if (!audio) return;
+    
+    // 给div加上css效果
     key.classList.add('playing');
     audio.currentTime = 0;
     audio.play();
@@ -76,6 +81,8 @@
 
   const keys = Array.from(document.querySelectorAll('.key'));
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  
+  // 给window对象添加事件监听，监听keydown事件，响应函数是playSound
   window.addEventListener('keydown', playSound);
 </script>
 
